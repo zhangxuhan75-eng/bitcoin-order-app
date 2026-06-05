@@ -87,8 +87,14 @@ jobs:
         run: |
           npm ci --force
 
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Deploy
         env:
           GITHUB_TOKEN: ${{ secrets.WORKSHOP6_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.WORKSHOP6_GITHUB_TOKEN }}
         run: |
-          npm run deploy
+          npm run deploy -- --no-silent
